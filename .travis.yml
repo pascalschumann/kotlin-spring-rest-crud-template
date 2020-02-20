@@ -7,5 +7,7 @@ jdk:
 services:
   - docker
 
+install: 
+- gradle wrapper --gradle-version 4.2
 script:
 - .travis/run.sh
