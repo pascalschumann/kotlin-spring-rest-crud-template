@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.2.2.RELEASE"
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
+    id("org.unbroken-dome.test-sets") version "2.1.1"
     kotlin("jvm") version "1.3.61"
     kotlin("plugin.spring") version "1.3.61"
 
@@ -32,7 +33,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-
     // Database: in-memory with h2
     runtimeOnly("com.h2database:h2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -40,6 +40,10 @@ dependencies {
 
     // Annotation Processing
     kapt("org.springframework.boot:spring-boot-configuration-processor")
+
+    // OpenApi/Swagger documentation
+    implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
     // test
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
@@ -49,11 +53,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("com.ninja-squad:springmockk:1.1.3")
+    testImplementation("io.rest-assured:rest-assured:3.3.0")
+    testImplementation("org.awaitility:awaitility:4.0.1")
 
-    // OpenApi/Swagger documentation
-    implementation("io.springfox:springfox-swagger2:2.9.2")
-    implementation("io.springfox:springfox-swagger-ui:2.9.2")
 }
+
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
@@ -61,6 +66,7 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
     }
 }
+
 
 tasks.withType<Test> {
     useJUnitPlatform()
