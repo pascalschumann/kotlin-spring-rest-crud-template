@@ -5,4 +5,4 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-data class Todo(@Id @GeneratedValue val id: Long, val name: String)
+data class Todo(@Id @GeneratedValue val id: Long?, val name: String)
