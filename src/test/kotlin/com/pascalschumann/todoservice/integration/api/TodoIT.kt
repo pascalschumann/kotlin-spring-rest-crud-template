@@ -68,13 +68,13 @@ class TodosIT : AbstractIT() {
     }
 
     // ------------------- utils methods --------------
-    private fun readTodo(id: Long): Todo? {
+    private fun readTodo(id: Long?): Todo? {
         return RestAssured.given().spec(REQUEST_SPECIFICATION).`when`()
                 .get(Constants.API_ENDPOINT_TODOS.toString() + "/" + id).then()
                 .statusCode(org.apache.http.HttpStatus.SC_OK).extract().`as`(Todo::class.java)
     }
 
-    private fun deleteTodo(id: Long) {
+    private fun deleteTodo(id: Long?) {
         RestAssured.given().spec(REQUEST_SPECIFICATION).`when`()
                 .delete(Constants.API_ENDPOINT_TODOS.toString() + "/" + id).then()
                 .statusCode(HttpStatus.SC_OK)
